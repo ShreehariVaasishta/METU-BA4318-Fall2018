@@ -6,4 +6,3 @@ BA4318 is a course that teaches Python within the context of business data. It c
 If you want to contact me regarding reuse of code or projects please contact me via Linkedin: https://www.linkedin.com/in/boragungoren/
 
 
-Students and their Github repos for this semester are as follows: 
