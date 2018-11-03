@@ -1,11 +1,11 @@
 import os
 
 # Here is an absolute path
-winabspath = "C:\\Users\\bora\\Dropbox\\METU\\METU BA4318 Fall 2018"
+winabspath = "C:\\Users\\gbora\\Desktop"
 linabspath = "home/bora/Dropbox/METU/METU BA4318 Fall 2018/"
 
 # Here is a relative path for course github Windows and Linux 
-winprojectdir = "Github Repo\\METU-BA4318-Fall2018\\Session 06 - Files"
+winprojectdir = "Session 06 - Files"
 linprojectdir = "Github Repo/METU-BA4318-Fall2018/Session 06 - Files"
 
 inputfilename = "test-data.txt"
