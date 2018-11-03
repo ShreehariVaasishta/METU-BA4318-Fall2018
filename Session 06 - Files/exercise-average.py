@@ -3,8 +3,7 @@ from myprobabilityfunctions import preparefile
 from averages import centerofmass
 
 # create file path
-#winabspath = "C:\\Users\\gbora\\Desktop"
-winabspath = "C:\\Users\\bora\\Dropbox\\METU\\METU BA4318 Fall 2018\\Github Repo\\METU-BA4318-Fall2018"
+winabspath = "C:\\Users\\gbora\\Desktop"
 winprojectdir = "Session 06 - Files"
 inputfilename = "test-data.txt"
 inpath = path.join(winabspath, winprojectdir, inputfilename)
