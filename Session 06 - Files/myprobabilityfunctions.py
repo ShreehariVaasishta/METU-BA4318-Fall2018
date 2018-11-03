@@ -1,5 +1,20 @@
 """ myprobabilityfunctions - functions to calculate some functions """
 
+def preparefile (inpath):
+    # open file creating a context so that it is automatically created
+    # and process line by line in to a list of strings
+    with open(inpath, 'r') as infileobject:
+        lines = infileobject.readlines()
+    points = []
+    for line in lines:
+        columns = line.split()
+        x = float(columns[0])
+        y = float (columns[1])
+        newpoint = (x, y)
+        points.append(newpoint)
+    return points
+
+
 def pxltX(X,dimension):
     if len (dimension) == 0:
         return 0
@@ -13,3 +28,10 @@ def pxltX(X,dimension):
             break
     prob = float (index) / float (size)
     return prob
+
+def pxyltXY(X,Y,points):
+    xes, ys = zip(*points)
+    px = pxltX(X, xes)
+    py = pxltX(Y, ys)
+    pxy = px * py
+    return pxy

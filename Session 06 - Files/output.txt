@@ -1,1 +1,1 @@
-Hello world
+Probabilities P(x <500.0, y <500.0 = 0.26

@@ -20,37 +20,20 @@ print("Input filepath: ", inpath)
 print("Output filepath: ", outpath)
 linecount = 0
 points = []
-# open file creating a context so that it is automatically created
-# and process line by line in to a list of strings
-with open(inpath, 'r') as infileobject:
-    lines = infileobject.readlines()
-linecount = len(lines)
-print("Linecount: ", linecount)
-print("First line as a string:", lines[0])
 
-for line in lines:
-    columns = line.split()
-    x = float(columns[0])
-    y = float (columns[1])
-    newpoint = (x, y)
-    points.append(newpoint)
-
-print("First point: ", points[0])
+from myprobabilityfunctions import preparefile
+points = preparefile (inpath)
 
 userx = float ( input("x value (0-1000) :") )
 usery = float ( input("y value (0-1000) :") )
 
-xes, ys = zip(*points)
-print (len (xes) ) 
-
-from myprobabilityfunctions import pxltX
-
-px = pxltX(userx, xes)
-py = pxltX(usery, ys)
-pxy = px * py
+from myprobabilityfunctions import pxyltXY
+pxy = pxyltXY(userx, usery, points)
 print (" P(x <", userx, ", y <", usery, " = ", pxy)
 
 # simple output
 outfileobject = open(outpath, 'w')
-outfileobject.write("Hello world")
+outfileobject.write("Probabilities")
+result = " P(x <" + str (userx) + ", y <" + str (usery) + " = " + str(pxy)
+outfileobject.write(result)
 outfileobject.close()
