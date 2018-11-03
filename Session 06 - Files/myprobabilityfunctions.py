@@ -18,18 +18,19 @@ def preparefile (inpath):
 def pxltX(X,dimension):
     if len (dimension) == 0:
         return 0
+    
     clone = list(dimension)
     clone.sort()
+    if X < clone[0]:
+        return 0.0
+    elif X > clone[len(clone)-1]:
+        return 1.0
     index = 0
     size = len(clone)
     for xi in clone:
         if xi > X :
             index = clone.index(xi)
             break
-    if index == 0:
-        # index is still 0, not updated
-        # then X is greater than all
-        return 1.0
     prob = float (index) / float (size)
     return prob
 
