@@ -11,5 +11,9 @@ def pxltX(X,dimension):
         if xi > X :
             index = clone.index(xi)
             break
+    if index == 0:
+        # index is still 0, not updated
+        # then X is greater than all
+        return 1.0
     prob = float (index) / float (size)
     return prob
