@@ -16,15 +16,19 @@ print(df.axes)
 
 # Create slices for training and test data
 size = len(df)
-train = df[0:size-200]
-test = df[size-200:]
 head = df[0:5]
 tail = df [size-5:]
 print("Head")
 print(head)
-
 print("Tail")
 print(tail)
+
+train = df[0:size-201]
+test = df[size-200:]
+
+#train = df.copy()
+#test = df.copy()
+
 
 df.DATE = pd.to_datetime(df.DATE,format="%Y-%m-%d")
 df.index = df.DATE 
@@ -50,7 +54,7 @@ print("RMSE: ",rms)
 
 #Moving average approach
 print("Moving Average")
-windowsize = 60
+windowsize = 15
 y_hat_avg = test.copy()
 y_hat_avg['moving_avg_forecast'] = train['VALUE'].rolling(windowsize).mean().iloc[-1]
 rms = sqrt(mean_squared_error(test.VALUE, y_hat_avg.moving_avg_forecast))
@@ -59,7 +63,7 @@ print("RMSE: ",rms)
 # Simple Exponential Smoothing
 print("Simple Exponential Smoothing")
 y_hat_avg = test.copy()
-alpha = 0.0
+alpha = 0.2
 fit2 = SimpleExpSmoothing(np.asarray(train['VALUE'])).fit(smoothing_level=alpha,optimized=False)
 y_hat_avg['SES'] = fit2.forecast(len(test))
 rms = sqrt(mean_squared_error(test.VALUE, y_hat_avg.SES))
@@ -70,8 +74,9 @@ print("Holt")
 sm.tsa.seasonal_decompose(train.VALUE).plot()
 result = sm.tsa.stattools.adfuller(train.VALUE)
 # plt.show()
+
 y_hat_avg = test.copy()
-alpha = 0.03
+alpha = 0.4
 fit1 = Holt(np.asarray(train['VALUE'])).fit(smoothing_level = alpha,smoothing_slope = 0.1)
 y_hat_avg['Holt_linear'] = fit1.forecast(len(test))
 rms = sqrt(mean_squared_error(test.VALUE, y_hat_avg.Holt_linear))
@@ -88,9 +93,9 @@ print("RMSE: ",rms)
 
 # Seasonal ARIMA
 # This is a naive use of the technique. See - http://www.seanabu.com/2016/03/22/time-series-seasonal-ARIMA-model-in-python/
-#print("Seasonal ARIMA")
-#y_hat_avg = test.copy()
-#fit1 = sm.tsa.statespace.SARIMAX(train.VALUE, order=(1, 0, 0),seasonal_order=(0,1,1,1)).fit()
-#y_hat_avg['SARIMA'] = fit1.predict(start="2008-12-01", end="2018-11-30", dynamic=True)
-#rms = sqrt(mean_squared_error(test.VALUE, y_hat_avg.SARIMA))
-#print("RMSE: ",rms)
+# print("Seasonal ARIMA")
+# y_hat_avg = test.copy()
+# fit1 = sm.tsa.statespace.SARIMAX(train.VALUE, order=(1, 0, 0),seasonal_order=(0,1,1,1)).fit()
+# y_hat_avg['SARIMA'] = fit1.predict(start="2008-12-01", end="2018-11-29", dynamic=True)
+# rms = sqrt(mean_squared_error(test.VALUE, y_hat_avg.SARIMA))
+# print("RMSE: ",rms)
